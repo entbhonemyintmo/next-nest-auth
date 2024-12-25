@@ -10,6 +10,9 @@ export class AuthController {
 
     @Post('signup')
     register(@Body() payload: CreateUserDto) {
+
+        this.logger.log('Registering new user: ' + JSON.stringify(payload));
+
         return this.authService.createUser(payload);
     }
 }

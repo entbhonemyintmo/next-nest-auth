@@ -7,9 +7,10 @@ interface InputFieldProps {
 	label: string;
 	type: HTMLInputTypeAttribute;
 	placeholder?: string;
+	errors?: string[];
 }
 
-const InputField = ({ name, label, type, placeholder }: InputFieldProps) => {
+const InputField = ({ name, label, type, placeholder, errors }: InputFieldProps) => {
 	return (
 		<div className='w-full'>
 			<Label htmlFor={name}>{label}</Label>
@@ -18,6 +19,15 @@ const InputField = ({ name, label, type, placeholder }: InputFieldProps) => {
 				name={name}
 				placeholder={placeholder}
 			/>
+			<>
+				{errors?.map((error, index) => (
+					<span
+						key={index}
+						className='text-red-500'>
+						{error}
+					</span>
+				))}
+			</>
 		</div>
 	);
 };
