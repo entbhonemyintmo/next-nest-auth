@@ -3,8 +3,7 @@
 import signup from "@/actions/signup";
 import { useToast } from "@/hooks/use-toast";
 import InputField from "@components/input-field";
-import { Button } from "@components/ui/button";
-import { Loader } from "lucide-react";
+import LoadingButton from "@components/loading-btn";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -48,9 +47,9 @@ const Signup = () => {
 						errors={status?.error?.password}
 					/>
 
-					<Button type='submit'>{pending ? <Loader className='animate-spin' /> : "Singup"}</Button>
+					<LoadingButton>Signup</LoadingButton>
 
-					<div className='inline-flex items-center gap-2'>
+					<div className='inline-flex items-center justify-center gap-2'>
 						<p className='text-sm'>Already have an account?</p>
 						<Link
 							href='/auth/signin'

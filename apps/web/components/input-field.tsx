@@ -18,8 +18,9 @@ const InputField = ({ name, label, type, placeholder, errors }: InputFieldProps)
 				type={type}
 				name={name}
 				placeholder={placeholder}
+				className='dark:bg-gray-600'
 			/>
-			<>
+			<div className='flex flex-col gap-1'>
 				{errors?.map((error, index) => (
 					<span
 						key={index}
@@ -27,7 +28,7 @@ const InputField = ({ name, label, type, placeholder, errors }: InputFieldProps)
 						{error}
 					</span>
 				))}
-			</>
+			</div>
 		</div>
 	);
 };

@@ -1,6 +1,8 @@
-import { Body, Controller, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Logger, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/user/dto';
+import { LocalSigninDto } from './dto';
+import { LocalGuard } from './guards';
 
 @Controller('auth')
 export class AuthController {
@@ -10,9 +12,12 @@ export class AuthController {
 
     @Post('signup')
     register(@Body() payload: CreateUserDto) {
-
-        this.logger.log('Registering new user: ' + JSON.stringify(payload));
-
         return this.authService.createUser(payload);
+    }
+
+    @Post('signin')
+    // @UseGuards(LocalGuard)
+    login(@Body() payload: LocalSigninDto) {
+        return this.authService.validateUser(payload.email, payload.password);
     }
 }
