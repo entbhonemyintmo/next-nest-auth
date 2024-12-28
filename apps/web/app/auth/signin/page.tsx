@@ -1,6 +1,6 @@
 "use client";
 
-import signup from "@/actions/signup";
+import { signin } from "@/actions";
 import { useToast } from "@/hooks/use-toast";
 import InputField from "@components/input-field";
 import LoadingButton from "@components/loading-btn";
@@ -8,8 +8,8 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
-const Signup = () => {
-	const [status, action] = useFormState(signup, undefined);
+const Signin = () => {
+	const [status, action] = useFormState(signin, undefined);
 	const { pending } = useFormStatus();
 	const { toast } = useToast();
 
@@ -22,17 +22,10 @@ const Signup = () => {
 	return (
 		<main className='w-full h-svh flex flex-col justify-center items-center'>
 			<div className='min-w-80 flex flex-col justify-center items-center p-10 rounded-lg shadow-lg dark:bg-gray-800 bg-white'>
-				<h1 className='text-3xl font-bold mb-5'>Sign up</h1>
+				<h1 className='text-3xl font-bold mb-5'>Sign in</h1>
 				<form
 					className='gap-6 flex flex-col'
 					action={action}>
-					<InputField
-						name='name'
-						label='Name'
-						type='name'
-						errors={status?.error?.name}
-					/>
-
 					<InputField
 						name='email'
 						label='Email'
@@ -47,14 +40,14 @@ const Signup = () => {
 						errors={status?.error?.password}
 					/>
 
-					<LoadingButton>Sign up</LoadingButton>
+					<LoadingButton>Sign in</LoadingButton>
 
 					<div className='inline-flex items-center justify-center gap-2'>
-						<p className='text-sm'>Already have an account?</p>
+						<p className='text-sm'>Don't have an account?</p>
 						<Link
-							href='/auth/signin'
+							href='/auth/signup'
 							className='underline'>
-							Sign in
+							Sign up
 						</Link>
 					</div>
 				</form>
@@ -63,4 +56,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+export default Signin;
