@@ -23,7 +23,7 @@ export class AuthService {
         return this.userService.create(payload);
     }
 
-    async validateUser(email: string, password: string): Promise<User & { accessToken: string; refreshToken: string }> {
+    async localSignin(email: string, password: string): Promise<User & { accessToken: string; refreshToken: string }> {
         const user = await this.userService.findByEmail(email);
 
         if (!user) throw new UnauthorizedException('Invalid credentials!');

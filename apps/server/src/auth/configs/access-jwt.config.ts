@@ -5,6 +5,6 @@ export const accessJwtConfig = registerAs(
     'access-jwt',
     (): JwtModuleOptions => ({
         secret: process.env.JWT_ACCESS_SECRET,
-        signOptions: { expiresIn: '60s' },
+        signOptions: { expiresIn: '15m' },
     }),
 );
