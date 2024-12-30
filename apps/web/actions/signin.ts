@@ -22,7 +22,15 @@ export async function signin(formState: FormState, formData: FormData) {
     if (response.ok) {
         const data = await response.json();
 
-        await createSession({ user: { id: data.id, name: data.name, email: data.email } });
+        await createSession({
+            user: {
+                id: data.id,
+                name: data.name,
+                email: data.email,
+            },
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
+        });
 
         redirect('/dashboard');
     } else {

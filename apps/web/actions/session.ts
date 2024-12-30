@@ -6,6 +6,8 @@ import { redirect } from 'next/navigation';
 
 export type Session = {
     user: { id: number; name: string; email: string };
+    accessToken: string;
+    refreshToken: string;
 };
 
 const secretKey = process.env.SESSION_SECRET_KEY!;
