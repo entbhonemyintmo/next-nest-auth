@@ -16,8 +16,6 @@ export class AccessJwtGuard extends AuthGuard('access-jwt') implements CanActiva
             context.getHandler(),
         ]);
 
-        console.log('debug: isPublicRoute: ', isPublicRoute);
-
         if (isPublicRoute) return true;
 
         return super.canActivate(context);

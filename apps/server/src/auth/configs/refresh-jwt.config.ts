@@ -3,5 +3,5 @@ import { JwtSignOptions } from '@nestjs/jwt';
 
 export const refreshJwtConfig = registerAs(
     'refresh-jwt',
-    (): JwtSignOptions => ({ secret: process.env.JWT_REFRESH_SECRET, expiresIn: '1hr' }),
+    (): JwtSignOptions => ({ secret: process.env.JWT_REFRESH_SECRET, expiresIn: '6hr' }),
 );

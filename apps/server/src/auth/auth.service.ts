@@ -6,6 +6,7 @@ import { CreateUserDto } from 'src/user/dto';
 import { UserService } from 'src/user/user.service';
 import { refreshJwtConfig } from './configs';
 import { ConfigType } from '@nestjs/config';
+import { Tokens, UserWithTokens } from './types';
 
 @Injectable()
 export class AuthService {
@@ -23,7 +24,7 @@ export class AuthService {
         return this.userService.create(payload);
     }
 
-    async localSignin(email: string, password: string): Promise<User & { accessToken: string; refreshToken: string }> {
+    async localSignin(email: string, password: string): Promise<UserWithTokens> {
         const user = await this.userService.findByEmail(email);
 
         if (!user) throw new UnauthorizedException('Invalid credentials!');
@@ -41,5 +42,11 @@ export class AuthService {
         delete user.password;
 
         return { ...user, accessToken, refreshToken };
+    }
+
+    async refreshAccessToken(user: UserWithTokens): Promise<Tokens> {
+        const accessToken = await this.jwtService.signAsync({ sub: user.id, type: 'access' });
+
+        return { accessToken, refreshToken: user.refreshToken };
     }
 }
